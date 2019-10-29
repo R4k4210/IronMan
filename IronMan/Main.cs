@@ -16,7 +16,6 @@ namespace IronMan
     public partial class Main : Form
     {
         string json;
-
         public Main()
         {
             InitializeComponent();
@@ -43,6 +42,8 @@ namespace IronMan
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
+            chart1.Series["Flex"].Points.Clear();
+            chart1.Series["Ext"].Points.Clear();
 
             if (cmbPorts.Text.Trim().Length == 0)
             {
@@ -97,6 +98,7 @@ namespace IronMan
                 txtExtCount.Text = jsonObj.Cont_ext;
                 txtAngExt.Text = jsonObj.Ang_ext;
 
+                UpdateChartValues(jsonObj.Cont_flex, jsonObj.Ang_flex, jsonObj.Cont_ext, jsonObj.Ang_ext);
             }
             catch (Exception e)
             {
@@ -116,6 +118,13 @@ namespace IronMan
             json = serialPort1.ReadLine().Trim();
             serialPort1.NewLine = "\r\n";
             Invoke(new EventHandler(DisplayThreadText));
+        }
+
+        private void UpdateChartValues(string contFlex, string flex, string contExt, string ext)
+        {
+            
+            chart1.Series["Flex"].Points.AddXY(Convert.ToInt32(contFlex), Convert.ToInt32(flex));
+            chart1.Series["Ext"].Points.AddXY(Convert.ToInt32(contExt), Convert.ToInt32(ext));
         }
     }
 

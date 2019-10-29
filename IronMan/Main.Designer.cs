@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFlexCount = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -46,7 +50,9 @@
             this.txtExtCount = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.Parameters = new System.Windows.Forms.GroupBox();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.Parameters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -217,11 +223,34 @@
             this.Parameters.TabStop = false;
             this.Parameters.Text = "Parameters";
             // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(12, 256);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series1.Legend = "Legend1";
+            series1.Name = "Flex";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series2.Legend = "Legend1";
+            series2.Name = "Ext";
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(555, 167);
+            this.chart1.TabIndex = 17;
+            this.chart1.Text = "Gráfico";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 278);
+            this.ClientSize = new System.Drawing.Size(579, 435);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.Parameters);
             this.Controls.Add(this.btnDisconnect);
             this.Controls.Add(this.btnConnect);
@@ -234,6 +263,7 @@
             this.Load += new System.EventHandler(this.Main_Load);
             this.Parameters.ResumeLayout(false);
             this.Parameters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,6 +288,7 @@
         private System.Windows.Forms.TextBox txtExtCount;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox Parameters;
+        public System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 
