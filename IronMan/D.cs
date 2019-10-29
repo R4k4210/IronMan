@@ -8,9 +8,8 @@ namespace IronMan
 {
     class D
     {
-        public JsonData d { get; set; }
+        public JsonData data { get; set; }
 
-    
     }
    
 }

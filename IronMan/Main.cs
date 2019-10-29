@@ -10,7 +10,6 @@ using System.IO.Ports;
 using System.Management;
 using Newtonsoft.Json;
 using System.Windows.Forms;
-using Newtonsoft.Json.Linq;
 
 namespace IronMan
 {
@@ -24,16 +23,14 @@ namespace IronMan
       
         }
 
-        private void btnGetPuertos_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
         private void Main_Load(object sender, EventArgs e)
         {
 
-            Console.WriteLine("START APP");
+            txtFlexCount.BackColor = Color.White;
+            txtFlexAng.BackColor = Color.White;
+            txtExtCount.BackColor = Color.White;
+            txtAngExt.BackColor = Color.White;
+
             string[] ports = SerialPort.GetPortNames();
 
             foreach (string port in ports)
@@ -84,22 +81,27 @@ namespace IronMan
         private void WritePayload(string json)
         {
 
-            Console.WriteLine(json);
+            //Console.WriteLine(json);
             try
             {
-                JsonData obj = JsonConvert.DeserializeObject<JsonData>(json);
-                Console.WriteLine("Cont_Flex" + obj.Cont_flex + obj.Cont_ext + obj.Ang_flex + obj.Ang_ext);
-                txtMax.Text = obj.Cont_flex;
+  
+                dynamic data = JsonConvert.DeserializeObject(json);
+                JsonData jsonObj = new JsonData();
+                jsonObj.Cont_flex = data["d"].Cont_flex;
+                jsonObj.Ang_flex = data["d"].Ang_flex;
+                jsonObj.Cont_ext = data["d"].Cont_ext;
+                jsonObj.Ang_ext = data["d"].Ang_ext;    
+                
+                txtFlexCount.Text = jsonObj.Cont_flex;
+                txtFlexAng.Text = jsonObj.Ang_flex;
+                txtExtCount.Text = jsonObj.Cont_ext;
+                txtAngExt.Text = jsonObj.Ang_ext;
+
             }
             catch (Exception e)
             {
               
             }
-            
-            //txtMax.Text = Convert.ToString(obj.Cont_flex);
-           
-
-            //Console.WriteLine("Cont_Flex" + result.cont_flex + result.cont_ext + result.ang_flex + result.ang_ext);
 
         }
 
