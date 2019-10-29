@@ -123,8 +123,8 @@ namespace IronMan
         private void UpdateChartValues(string contFlex, string flex, string contExt, string ext)
         {
             
-            chart1.Series["Flex"].Points.AddXY(Convert.ToInt32(contFlex), Convert.ToInt32(flex));
-            chart1.Series["Ext"].Points.AddXY(Convert.ToInt32(contExt), Convert.ToInt32(ext));
+            chart1.Series["Flex"].Points.AddY(Convert.ToInt32(flex));
+            chart1.Series["Ext"].Points.AddY(Convert.ToInt32(ext));
         }
     }
 
